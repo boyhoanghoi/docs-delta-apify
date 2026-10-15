@@ -18,5 +18,11 @@
   "unitTestsPassed": 31,
   "publicHttpStatus": 200,
   "anonymousPublicApiVerified": true,
-  "billingEvent": "page-processed"
+  "billingEvent": "page-processed",
+  "acquisitionKit": "docs/ACQUISITION_7_DAYS.md",
+  "pendingDocumentationBuild": {
+    "buildId": "6zMU7RfTzcqkSI9bA",
+    "sourceCommit": "958341fbea0843992fea46ae14599ab1f69ff310",
+    "verification": "API timeouts; final build and Store display unconfirmed"
+  }
 }

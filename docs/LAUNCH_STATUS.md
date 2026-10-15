@@ -21,6 +21,22 @@ Observed platform usage for these small owner-run samples: USD 0.000697804673287
 
 Owner tests are not customer revenue. No first customer or payout is claimed. No promotional messages were sent.
 
+## First-user kit update — 16 October 2026
+
+The [two-page walkthrough](FIRST_RUN.md), observed-run image, [English/Vietnamese
+post drafts](LAUNCH_POSTS.md), [7-day experiment](ACQUISITION_7_DAYS.md), tracking
+CSV and validated first-run input are public in the GitHub repository. The
+image's 2-page / 37-chunk figures were checked against the recorded owner-run
+output. The image was visually inspected and its public PNG URL verified.
+
+The Store README update was uploaded and build `6zMU7RfTzcqkSI9bA` was started
+from commit `958341f`. Final build/display verification could not complete:
+authenticated API, public API and IPv4 retries timed out. The last verified
+release above remains the verification reference until the new build is checked.
+No runtime code or pricing change was requested and no additional paid run was
+started for this documentation update. No posts, replies or direct messages
+were sent to any community or person.
+
 ## Artwork and recurring workflows
 
 Upload `assets/brand/icon-512.png` under [Publishing / Display information](https://console.apify.com/actors/02Xe4XI3SVfP6CIka/publication) to replace the default Actor icon. The PNG and editable SVG are in the repository.
