@@ -29,10 +29,10 @@ CSV and validated first-run input are public in the GitHub repository. The
 image's 2-page / 37-chunk figures were checked against the recorded owner-run
 output. The image was visually inspected and its public PNG URL verified.
 
-The Store README update was uploaded and build `6zMU7RfTzcqkSI9bA` was started
-from commit `958341f`. Final build/display verification could not complete:
-authenticated API, public API and IPv4 retries timed out. The last verified
-release above remains the verification reference until the new build is checked.
+The Store README update was uploaded from commit `958341f`. After temporary
+API connection timeouts, the recovered public Actor API confirmed successful
+release `0.1.2` / `6zMU7RfTzcqkSI9bA` as the latest tagged build on 16 October 2026.
+The new image URL was observed in the public Store HTML.
 No runtime code or pricing change was requested and no additional paid run was
 started for this documentation update. No posts, replies or direct messages
 were sent to any community or person.
