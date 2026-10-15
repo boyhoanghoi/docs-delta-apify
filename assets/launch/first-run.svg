@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+<style>text{font-family:'Segoe UI',Arial,sans-serif;fill:#172d48}.muted{fill:#5d6f84}.mono{font-family:Consolas,monospace}.label{font-size:19px;font-weight:600;letter-spacing:2px}.body{font-size:25px}.small{font-size:20px}</style>
+<rect width="1600" height="900" fill="#f6f7fb"/>
+<rect x="64" y="55" width="62" height="62" rx="16" fill="#2149a8"/>
+<path d="M82 69h20l10 10v24H82zM101 69v11h11M89 87h13M89 94h10" fill="none" stroke="#f8f5e9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="144" y="99" font-size="42" font-weight="650">DocsDelta</text>
+<text x="1536" y="95" text-anchor="end" class="label muted">DOCUMENTATION → RAG CHANGE FEED</text>
+<text x="64" y="207" font-size="59" font-weight="600">Refresh the docs. Keep the source.</text>
+<text x="64" y="256" class="body muted">An observed owner test on two public documentation pages.</text>
+<rect x="64" y="311" width="706" height="370" rx="18" fill="white" stroke="#d9e1ee"/>
+<text x="96" y="359" class="label" fill="#2149a8">01 / FIRST CHECK</text>
+<text x="96" y="426" font-size="47" font-weight="600">2 pages → 37 chunks</text>
+<text x="96" y="475" class="body muted">Python docs + Django docs</text>
+<rect x="96" y="506" width="129" height="37" rx="6" fill="#e9f0ff"/>
+<text x="160" y="532" text-anchor="middle" class="small mono">NEW × 2</text>
+<text x="96" y="589" class="body">Markdown · chunk IDs · source URLs</text>
+<text x="96" y="635" class="small muted">2 saved page events; chunks included.</text>
+<rect x="800" y="311" width="736" height="370" rx="18" fill="white" stroke="#d9e1ee"/>
+<text x="832" y="359" class="label">02 / SAME DOCS + SNAPSHOT</text>
+<text x="832" y="426" font-size="47" font-weight="600">0 saved changes</text>
+<text x="832" y="475" class="body muted">changedOnly: true</text>
+<rect x="832" y="506" width="218" height="37" rx="6" fill="#e5f3ec"/>
+<text x="941" y="532" text-anchor="middle" class="small mono" fill="#24624b">UNCHANGED × 2</text>
+<text x="832" y="589" class="body">Keep the existing index and baseline.</text>
+<text x="832" y="635" class="small muted">0 paid page events in this repeat check.</text>
+<text x="64" y="741" class="body">HTML extraction. Explicit snapshot handoff. No automatic page deletion.</text>
+<line x1="64" y1="782" x2="1536" y2="782" stroke="#d9e1ee"/>
+<text x="64" y="829" class="small muted">One sample, not a customer result or fixed output count. No embeddings are generated.</text>
+<text x="1536" y="866" text-anchor="end" class="small mono" fill="#2149a8">Start with 2 URLs on Apify Store ↗</text>
+</svg>

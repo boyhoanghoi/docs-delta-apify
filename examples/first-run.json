@@ -1,0 +1,9 @@
+{
+  "urls": [
+    "https://docs.python.org/3/tutorial/datastructures.html",
+    "https://docs.djangoproject.com/en/stable/intro/overview/"
+  ],
+  "maxPages": 2,
+  "followLinks": false,
+  "changedOnly": false
+}

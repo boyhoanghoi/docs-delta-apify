@@ -4,6 +4,10 @@ Turn public HTML documentation into clean Markdown, source-linked chunks and an 
 
 Built for documentation indexing, n8n pipelines, knowledge-base synchronization and teams that need an inspectable change feed. This is deterministic extraction and comparison: no AI quality score, embeddings or search ranking claims.
 
+**Try two pages first:** [follow the walkthrough](https://github.com/boyhoanghoi/docs-delta-apify/blob/main/docs/FIRST_RUN.md), inspect their source-linked chunks, then compare a repeat run with the exported snapshot. The caller supplies that snapshot; a schedule alone does not retain it.
+
+![Observed owner test: two public documentation pages produced 37 chunks, then both were unchanged on a repeat check. One sample, not a fixed output or customer benchmark.](https://raw.githubusercontent.com/boyhoanghoi/docs-delta-apify/main/assets/launch/first-run.png)
+
 ## Start with two pages
 
 ```json
