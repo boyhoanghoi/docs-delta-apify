@@ -1,0 +1,47 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "DocsDelta output",
+  "description": "Paid events attach only to saved page rows. No page removals are inferred. Download SNAPSHOT for the next run.",
+  "properties": {
+    "snapshot": {
+      "type": "string",
+      "title": "Next-run snapshot",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SNAPSHOT"
+    },
+    "changes": {
+      "type": "string",
+      "title": "NEW/UPDATED saved pages",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/CHANGES"
+    },
+    "chunks": {
+      "type": "string",
+      "title": "Flattened RAG chunks",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/RAG_CHUNKS"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run summary and coverage limits",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    },
+    "diagnostics": {
+      "type": "string",
+      "title": "Unbilled skipped/failed pages",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/DIAGNOSTICS"
+    },
+    "csv": {
+      "type": "string",
+      "title": "Spreadsheet-safe page CSV",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/results.csv"
+    },
+    "ndjson": {
+      "type": "string",
+      "title": "Saved page NDJSON",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/results.ndjson"
+    },
+    "results": {
+      "type": "string",
+      "title": "Saved document checks",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    }
+  }
+}

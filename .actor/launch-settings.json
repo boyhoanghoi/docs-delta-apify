@@ -1,0 +1,16 @@
+{
+  "title": "Website to Markdown & RAG Change Monitor | DocsDelta",
+  "description": "Convert public documentation into clean Markdown, source-linked RAG chunks and readable change diffs. Bring a prior snapshot to update knowledge bases safely.",
+  "seoDescription": "Turn web documentation into Markdown and source-linked RAG chunks. Compare snapshots, inspect diffs and update changed chunks without false page deletions.",
+  "categories": [
+    "AI",
+    "DEVELOPER_TOOLS"
+  ],
+  "seoTitle": "Website to Markdown & RAG Change Monitor | DocsDelta",
+  "defaultRunOptions": {
+    "build": "latest",
+    "timeoutSecs": 300,
+    "memoryMbytes": 512
+  },
+  "actorPermissionLevel": "LIMITED_PERMISSIONS"
+}

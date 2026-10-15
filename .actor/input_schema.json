@@ -1,0 +1,119 @@
+{
+  "title": "DocsDelta input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "urls": {
+      "title": "Documentation URLs",
+      "type": "array",
+      "editor": "stringList",
+      "description": "Public HTTP(S) document URLs. Use consistent seed URLs between snapshot runs.",
+      "prefill": [
+        "https://docs.python.org/3/tutorial/datastructures.html",
+        "https://docs.djangoproject.com/en/stable/intro/overview/"
+      ]
+    },
+    "sitemapUrls": {
+      "title": "Sitemap URLs (optional)",
+      "type": "array",
+      "editor": "stringList",
+      "description": "Same-site sitemap URL sets or indexes. Bounded to 10 files and depth 2.",
+      "default": []
+    },
+    "followLinks": {
+      "title": "Follow same-site links",
+      "type": "boolean",
+      "default": false,
+      "description": "Disabled by default. All discovered page attempts count toward maxPages."
+    },
+    "contentCssSelector": {
+      "title": "Content CSS selector",
+      "type": "string",
+      "editor": "textfield",
+      "description": "Optional. Prefer the main documentation content region; no match skips the page unbilled."
+    },
+    "excludeCssSelectors": {
+      "title": "Exclude CSS selectors",
+      "type": "array",
+      "editor": "stringList",
+      "default": [],
+      "description": "Optional elements to remove in addition to standard navigation/script cleanup."
+    },
+    "includeUnchanged": {
+      "title": "Save unchanged checks",
+      "type": "boolean",
+      "default": true,
+      "description": "Successful unchanged checks are saved and billed once unless changedOnly is enabled."
+    },
+    "changedOnly": {
+      "title": "Changed pages only",
+      "type": "boolean",
+      "default": false,
+      "description": "Save/bill only NEW or UPDATED pages. Overrides includeUnchanged. Requests still consume resources."
+    },
+    "previousSnapshot": {
+      "title": "Previous SNAPSHOT JSON",
+      "type": "object",
+      "editor": "json",
+      "description": "Paste the entire SNAPSHOT from a previous run. Version 1, max 5 MiB/2000 pages. No shared cross-run state.",
+      "default": {
+        "version": 1,
+        "pages": {}
+      }
+    },
+    "maxPages": {
+      "title": "Maximum page attempts",
+      "type": "integer",
+      "editor": "number",
+      "default": 5,
+      "minimum": 1,
+      "maximum": 500,
+      "description": "Maximum document page attempts for this run, including failed or skipped pages. Sitemap and robots requests are additional. No page removals are inferred from an incomplete crawl."
+    },
+    "minTextLength": {
+      "title": "Minimum content characters",
+      "type": "integer",
+      "editor": "number",
+      "default": 40,
+      "minimum": 40,
+      "maximum": 10000,
+      "description": "Minimum cleaned Markdown character count. Smaller pages and detected JavaScript shells are skipped without a paid event and retain their previous baseline."
+    },
+    "maxTextChars": {
+      "title": "Maximum page characters",
+      "type": "integer",
+      "editor": "number",
+      "default": 120000,
+      "minimum": 1000,
+      "maximum": 120000,
+      "description": "Maximum cleaned Markdown characters per document. Larger documents are skipped without replacing their previous snapshot or emitting chunk tombstones."
+    },
+    "chunkSize": {
+      "title": "Chunk character limit",
+      "type": "integer",
+      "editor": "number",
+      "default": 1800,
+      "minimum": 200,
+      "maximum": 8000,
+      "description": "Maximum characters per heading-based RAG chunk. Changing this setting can change chunk IDs and produce an UPDATED row even when page Markdown is unchanged."
+    },
+    "maxChunksPerPage": {
+      "title": "Maximum chunks per page",
+      "type": "integer",
+      "editor": "number",
+      "default": 200,
+      "minimum": 1,
+      "maximum": 200,
+      "description": "Maximum chunks for one complete document. Pages exceeding this limit are skipped without a paid event or baseline advancement."
+    },
+    "timeoutSeconds": {
+      "title": "Request timeout (seconds)",
+      "type": "integer",
+      "editor": "number",
+      "default": 30,
+      "minimum": 5,
+      "maximum": 60,
+      "description": "Timeout in seconds for each public HTTP request, including robots and sitemap requests. Failed requests preserve existing snapshot entries."
+    }
+  }
+}

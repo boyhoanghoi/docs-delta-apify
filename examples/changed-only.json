@@ -1,0 +1,11 @@
+{
+  "urls": [
+    "https://docs.python.org/3/tutorial/datastructures.html"
+  ],
+  "maxPages": 5,
+  "changedOnly": true,
+  "previousSnapshot": {
+    "version": 1,
+    "pages": {}
+  }
+}

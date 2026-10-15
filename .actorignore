@@ -1,0 +1,11 @@
+.git/
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+output/
+storage/
+tests/
+assets/
+.openai/
+.env*

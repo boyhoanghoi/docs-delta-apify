@@ -1,0 +1,19 @@
+{
+  "pricingInfos": [
+    {
+      "pricingModel": "PAY_PER_EVENT",
+      "pricingPerEvent": {
+        "actorChargeEvents": {
+          "page-processed": {
+            "eventTitle": "Document page saved",
+            "eventDescription": "One successfully processed HTML page saved, including Markdown and all chunks. Saved UNCHANGED checks are billed; changedOnly skips unchanged pages without a charge. Failed, blocked, empty and oversized pages are not charged.",
+            "eventPriceUsd": 0.003,
+            "isPrimaryEvent": true,
+            "isOneTimeEvent": false
+          }
+        }
+      },
+      "minimalMaxTotalChargeUsd": 0.003
+    }
+  ]
+}

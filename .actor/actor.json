@@ -1,0 +1,20 @@
+{
+  "actorSpecification": 1,
+  "name": "website-markdown-rag-change-feed",
+  "title": "Website to Markdown & RAG Change Monitor | DocsDelta",
+  "description": "Clean public documentation into Markdown, source-linked chunks and an explicit NEW/UPDATED/UNCHANGED feed. Bring your own snapshot for conservative incremental RAG indexing.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "dockerfile": "../Dockerfile",
+  "dockerContextDir": "..",
+  "readme": "./README.md",
+  "input": "./input_schema.json",
+  "output": "./output_schema.json",
+  "storages": {
+    "dataset": "./dataset_schema.json"
+  },
+  "defaultMemoryMbytes": 512,
+  "minMemoryMbytes": 512,
+  "maxMemoryMbytes": 1024,
+  "usesStandbyMode": false
+}

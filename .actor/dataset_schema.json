@@ -1,0 +1,48 @@
+{
+  "actorSpecification": 1,
+  "fields": {},
+  "views": {
+    "overview": {
+      "title": "Document changes",
+      "transformation": {
+        "fields": [
+          "url",
+          "title",
+          "status",
+          "contentHash",
+          "observedAt",
+          "diffTruncated"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "url": {
+            "label": "Source",
+            "format": "link"
+          },
+          "title": {
+            "label": "Title",
+            "format": "text"
+          },
+          "status": {
+            "label": "Change",
+            "format": "text"
+          },
+          "contentHash": {
+            "label": "SHA-256",
+            "format": "text"
+          },
+          "observedAt": {
+            "label": "Observed",
+            "format": "date"
+          },
+          "diffTruncated": {
+            "label": "Diff shortened",
+            "format": "boolean"
+          }
+        }
+      }
+    }
+  }
+}
