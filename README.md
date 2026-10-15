@@ -1,5 +1,9 @@
 # DocsDelta — Website to Markdown & RAG Change Monitor
 
+<img src="assets/brand/icon-512.png" width="72" height="72" alt="DocsDelta icon">
+
+[Run on Apify Store](https://apify.com/reliable_quatrain/website-markdown-rag-change-feed) · [Vietnamese workflow guide](docs/WORKFLOW_COOKBOOK_VI.md) · [Launch verification](docs/LAUNCH_STATUS.md)
+
 Turn public HTML documentation into clean Markdown, source-linked chunks and an explicit **NEW / UPDATED / UNCHANGED** feed. Bring the previous run's snapshot to update your search index or RAG collection only when a page or its chunk identities changed.
 
 Built for documentation indexing, n8n pipelines, knowledge-base synchronization and teams that need an inspectable change feed. This is deterministic extraction and comparison: no AI quality score, embeddings or search ranking claims.
