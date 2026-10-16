@@ -32,6 +32,10 @@ class RunConfig:
     def from_dict(cls, data: dict) -> "RunConfig":
         if not isinstance(data, dict):
             raise ValueError("Input must be a JSON object.")
+        allowed = {"urls", "sitemapUrls", "maxPages", "followLinks", "contentCssSelector", "excludeCssSelectors", "minTextLength", "maxTextChars", "chunkSize", "maxChunksPerPage", "includeUnchanged", "changedOnly", "previousSnapshot", "timeoutSeconds"}
+        unknown = [str(key) for key in data if key not in allowed and not str(key).startswith("__")]
+        if unknown:
+            raise ValueError("Unknown input field(s): " + ", ".join(sorted(unknown)))
         def integer(key, default, low, high):
             value = data.get(key, default)
             if isinstance(value, bool) or not isinstance(value, int) or not low <= value <= high:
@@ -82,7 +86,7 @@ class RunConfig:
 def validate_snapshot(value: dict | None) -> dict:
     if value is None:
         return {"version": 1, "pages": {}}
-    if not isinstance(value, dict) or value.get("version") != 1 or not isinstance(value.get("pages"), dict):
+    if not isinstance(value, dict) or type(value.get("version")) is not int or value.get("version") != 1 or not isinstance(value.get("pages"), dict):
         raise ValueError("previousSnapshot must be a version:1 object with a pages mapping.")
     if len(value["pages"]) > 2000 or len(json.dumps(value, ensure_ascii=False).encode("utf-8")) > 5 * 1024 * 1024:
         raise ValueError("previousSnapshot exceeds the 2000-page / 5 MiB bound.")

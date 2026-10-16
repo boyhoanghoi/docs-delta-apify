@@ -52,6 +52,8 @@ Relative links resolve against the fetched final URL. Chunk `sourceUrl` and IDs 
 4. After the run succeeds, replace your stored baseline with the new `SNAPSHOT`. Keep the previous baseline if the run itself fails before exporting a new snapshot.
 5. Inspect `DIAGNOSTICS` and `SUMMARY` for blocked pages, limits and missing content before assuming coverage.
 
+**New: flat index operations.** Download `CHUNK_OPERATIONS` or `chunk-operations.ndjson` for explicit `REMOVE` and `UPSERT` records. Changed pages refresh all current chunk metadata, including retained chunk positions; `isNewChunk` identifies IDs not present in your baseline. Unchanged pages emit no operations. Apply the whole batch before promoting its snapshot. [Operation contract and local checkpoint workflow](https://github.com/boyhoanghoi/docs-delta-apify/blob/main/docs/INCREMENTAL_INDEXING.md).
+
 **No page removal is inferred, ever.** A missing sitemap entry, failed URL, 404, robots block, excluded/out-of-scope URL, truncated page or run limit cannot prove a page was deleted. Their prior snapshot entries are preserved unchanged. `cannotInferDeletions` is always true. Page removal from your index must be an explicit decision outside this Actor. Chunk tombstones are generated only from a complete successful refetch of that same page; skipped/failed/unsaved pages produce no tombstones and do not advance the baseline.
 
 For n8n, use an Apify Actor node or an authenticated HTTP Request node to start a run with the input above. Read its default dataset for changed page rows and `SNAPSHOT` from its default key-value store. Use your account's Apify API credentials in n8n's credential manager; do not put API tokens in website URLs or public workflows. Large snapshots can require external workflow storage; this Actor accepts at most 5 MiB.
@@ -83,6 +85,7 @@ The run also stops before exceeding 4 million accepted Markdown characters or a 
 - `SNAPSHOT`: next-run baseline, including preserved unprocessed prior entries.
 - `CHANGES`: saved `NEW`/`UPDATED` rows.
 - `RAG_CHUNKS`: flattened chunks from saved rows with page status/hash metadata. No embeddings are generated.
+- `CHUNK_OPERATIONS` / `chunk-operations.ndjson`: ordered, replayable REMOVE then UPSERT records for saved NEW/UPDATED pages only. Chunks and operations add no custom paid events.
 - `results.csv`: UTF-8 CSV of flat page fields, with formula-leading spreadsheet cells neutralized.
 - `results.ndjson`: one saved page per line.
 - `DIAGNOSTICS`, `SUMMARY`, `OUTPUT`: nonbillable failures, run limits and saved output.

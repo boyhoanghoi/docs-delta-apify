@@ -22,5 +22,25 @@ def rag_chunks(rows):
     return [{**chunk, "pageStatus": row["status"], "pageContentHash": row["contentHash"]} for row in rows for chunk in row["chunks"]]
 
 
+def chunk_operations(rows):
+    """Replayable per-page index operations from accepted changed rows only.
+
+    Refresh all current chunk metadata, including the index of retained chunks.
+    An absent or unsuccessfully fetched page is never a deletion signal.
+    """
+    operations = []
+    for row in rows:
+        if row["status"] not in {"NEW", "UPDATED"}:
+            continue
+        metadata = {"sourceUrl": row["url"], "pageStatus": row["status"],
+            "pageContentHash": row["contentHash"], "observedAt": row["observedAt"]}
+        for chunk_id in row["removedChunkIds"]:
+            operations.append({"operation": "REMOVE", "id": chunk_id, **metadata})
+        added = set(row["addedChunkIds"])
+        for chunk in row["chunks"]:
+            operations.append({**chunk, **metadata, "operation": "UPSERT", "isNewChunk": chunk["id"] in added})
+    return operations
+
+
 def ndjson(rows):
     return "".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows)

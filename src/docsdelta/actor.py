@@ -2,7 +2,7 @@ import asyncio
 from dataclasses import replace
 from .config import RunConfig
 from .pipeline import run_pipeline
-from .output import pages_csv, rag_chunks, ndjson
+from .output import pages_csv, rag_chunks, chunk_operations, ndjson
 
 BILLABLE_EVENT = "page-processed"
 
@@ -48,15 +48,20 @@ async def run_actor():
         else:
             report = await run_pipeline(config, on_result=save)
         rows = report["results"]
+        operations = chunk_operations(rows)
         summary = {**report["summary"], "budgetLimitReached": budget_reached,
             "billingEvent": BILLABLE_EVENT if is_ppe else None,
-            "chargedPages": manager.get_charged_event_count(BILLABLE_EVENT) if is_ppe else 0}
+            "chargedPages": manager.get_charged_event_count(BILLABLE_EVENT) if is_ppe else 0,
+            "chunkUpserts": sum(op["operation"] == "UPSERT" for op in operations),
+            "chunkRemovals": sum(op["operation"] == "REMOVE" for op in operations)}
         await Actor.set_value("SNAPSHOT", report["snapshot"])
         await Actor.set_value("SUMMARY", summary)
         await Actor.set_value("DIAGNOSTICS", report["diagnostics"])
         await Actor.set_value("RESULTS", rows)
         await Actor.set_value("CHANGES", [row for row in rows if row["status"] != "UNCHANGED"])
         await Actor.set_value("RAG_CHUNKS", rag_chunks(rows))
+        await Actor.set_value("CHUNK_OPERATIONS", operations)
+        await Actor.set_value("chunk-operations.ndjson", ndjson(operations), content_type="application/x-ndjson; charset=utf-8")
         await Actor.set_value("results.csv", pages_csv(rows), content_type="text/csv; charset=utf-8")
         await Actor.set_value("results.ndjson", ndjson(rows), content_type="application/x-ndjson; charset=utf-8")
         await Actor.set_value("OUTPUT", {"summary": summary, "diagnostics": report["diagnostics"], "results": rows})

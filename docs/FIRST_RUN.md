@@ -66,3 +66,8 @@ expected output. Never include account tokens, cookies or private documents.
 For automation, see [the Vietnamese workflow guide](WORKFLOW_COOKBOOK_VI.md).
 A schedule alone does not reload the previous snapshot; the calling workflow
 must pass it in. No particular n8n template or vector database is bundled.
+
+The new [incremental indexing guide](INCREMENTAL_INDEXING.md) documents a flat
+`CHUNK_OPERATIONS` / NDJSON feed and local checkpoint flags. Changed pages emit
+explicit REMOVE and UPSERT records; unchanged pages emit none. Finish applying
+the batch to your index before promoting the new snapshot.

@@ -92,11 +92,16 @@ def chunk_markdown(markdown: str, url: str, limit: int = 1800) -> list[dict]:
     sections = []
     heading = "Document"
     buffer = []
-    in_fence = False
+    fence = None
     for line in markdown.splitlines():
-        if line.startswith("```"):
-            in_fence = not in_fence
-        if not in_fence and re.match(r"^#{1,6} ", line):
+        marker = re.match(r"^ {0,3}(`{3,}|~{3,})(.*)$", line)
+        if marker:
+            run, suffix = marker.groups()
+            if fence is None:
+                fence = run
+            elif run[0] == fence[0] and len(run) >= len(fence) and not suffix.strip():
+                fence = None
+        if fence is None and re.match(r"^#{1,6} ", line):
             if buffer:
                 sections.append((heading, "\n".join(buffer).strip()))
             heading = re.sub(r"^#+ ", "", line)

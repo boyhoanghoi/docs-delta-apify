@@ -10,6 +10,9 @@ import unittest
 from unittest.mock import AsyncMock, patch
 
 from docsdelta.actor import BILLABLE_EVENT, run_actor
+from docsdelta.config import RunConfig
+from docsdelta.extract import extract_document
+from docsdelta.pipeline import compare_document
 
 
 class FakeManager:
@@ -71,7 +74,8 @@ class FakeActor:
 async def fake_crawl(config, on_result):
     saved = []
     for url in config.urls[:config.max_pages]:
-        row = {"url": url, "title": "Document", "status": "NEW", "chunks": [], "addedChunkIds": [], "removedChunkIds": []}
+        doc = extract_document("<main><h1>Document</h1><p>Source content for the accepted page and its bounded chunk export.</p></main>", url, RunConfig())
+        row = {"url": url, "observedAt": "2026-10-16T00:00:00Z", **doc, **compare_document(doc, None)}
         if not await on_result(row):
             break
         saved.append(row)
@@ -93,7 +97,12 @@ class ActorTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(actor.writes["SUMMARY"]["chargedPages"], 1)
         self.assertTrue(actor.writes["SUMMARY"]["budgetLimitReached"])
         self.assertEqual(actor.writes["SUMMARY"]["savedPages"], 1)
+        self.assertEqual(actor.writes["SUMMARY"]["chunkUpserts"], 1)
+        self.assertEqual(actor.writes["SUMMARY"]["chunkRemovals"], 0)
+        self.assertEqual(len(actor.writes["CHUNK_OPERATIONS"]), 1)
+        self.assertEqual(actor.writes["CHUNK_OPERATIONS"][0]["sourceUrl"], actor.dataset[0]["url"])
         self.assertNotIn("two.business.co", actor.writes["results.csv"])
+        self.assertNotIn("two.business.co", actor.writes["chunk-operations.ndjson"])
         self.assertEqual(len(actor.writes["DIAGNOSTICS"]), 1)
 
     async def test_zero_budget_starts_no_crawl_or_charge(self):
@@ -104,6 +113,8 @@ class ActorTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(actor.dataset, [])
         self.assertEqual(actor.events, [])
         self.assertTrue(actor.writes["SUMMARY"]["budgetLimitReached"])
+        self.assertEqual(actor.writes["CHUNK_OPERATIONS"], [])
+        self.assertEqual(actor.writes["chunk-operations.ndjson"], "")
 
     async def test_non_ppe_results_have_no_explicit_billing_event(self):
         actor = FakeActor(FakeManager(ppe=False))

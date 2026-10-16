@@ -1,6 +1,6 @@
 {
   "title": "Website to Markdown & RAG Change Monitor | DocsDelta",
-  "description": "Convert public documentation into clean Markdown, source-linked RAG chunks and readable change diffs. Bring a prior snapshot to update knowledge bases safely.",
+  "description": "Convert public web docs into Markdown and source-linked RAG chunks. Export explicit per-chunk UPSERT/REMOVE operations from saved changed pages, with a caller-supplied snapshot and conservative deletion handling.",
   "seoDescription": "Turn web documentation into Markdown and source-linked RAG chunks. Compare snapshots, inspect diffs and update changed chunks without false page deletions.",
   "categories": [
     "AI",

@@ -54,6 +54,8 @@ Relative links resolve against the fetched final URL. Chunk `sourceUrl` and IDs 
 4. After the run succeeds, replace your stored baseline with the new `SNAPSHOT`. Keep the previous baseline if the run itself fails before exporting a new snapshot.
 5. Inspect `DIAGNOSTICS` and `SUMMARY` for blocked pages, limits and missing content before assuming coverage.
 
+**New: flat index operations.** Download `CHUNK_OPERATIONS` or `chunk-operations.ndjson` to process explicit `REMOVE` and `UPSERT` records without unpacking page arrays. Changed pages refresh all current chunk metadata; `isNewChunk` lets you identify IDs already present in the baseline. Unchanged pages emit no operations. [Operation contract and recurring CLI workflow](docs/INCREMENTAL_INDEXING.md).
+
 **No page removal is inferred, ever.** A missing sitemap entry, failed URL, 404, robots block, excluded/out-of-scope URL, truncated page or run limit cannot prove a page was deleted. Their prior snapshot entries are preserved unchanged. `cannotInferDeletions` is always true. Page removal from your index must be an explicit decision outside this Actor. Chunk tombstones are generated only from a complete successful refetch of that same page; skipped/failed/unsaved pages produce no tombstones and do not advance the baseline.
 
 For n8n, use an Apify Actor node or an authenticated HTTP Request node to start a run with the input above. Read its default dataset for changed page rows and `SNAPSHOT` from its default key-value store. Use your account's Apify API credentials in n8n's credential manager; do not put API tokens in website URLs or public workflows. Large snapshots can require external workflow storage; this Actor accepts at most 5 MiB.
@@ -85,6 +87,7 @@ The run also stops before exceeding 4 million accepted Markdown characters or a 
 - `SNAPSHOT`: next-run baseline, including preserved unprocessed prior entries.
 - `CHANGES`: saved `NEW`/`UPDATED` rows.
 - `RAG_CHUNKS`: flattened chunks from saved rows with page status/hash metadata. No embeddings are generated.
+- `CHUNK_OPERATIONS` / `chunk-operations.ndjson`: ordered, replayable `REMOVE` then `UPSERT` records for saved NEW/UPDATED pages only; chunks do not incur separate paid events.
 - `results.csv`: UTF-8 CSV of flat page fields, with formula-leading spreadsheet cells neutralized.
 - `results.ndjson`: one saved page per line.
 - `DIAGNOSTICS`, `SUMMARY`, `OUTPUT`: nonbillable failures, run limits and saved output.
@@ -108,7 +111,13 @@ python -m venv .venv
 # Activate the virtual environment for your shell.
 python -m pip install -e .
 docsdelta --input examples/input.json --output output
+# Recurring local exports: load a checkpoint if it exists, then replace after exports.
+docsdelta --input examples/changed-only.json --output output --snapshot-file state/docs-snapshot.json
+# For an external index, load a read-only baseline; promote the new snapshot after indexing.
+docsdelta --input examples/changed-only.json --output output/next --previous-snapshot output/snapshot.json
 python -m unittest discover -s tests -v
 ```
 
 The local CLI has no paid-event integration. To prepare an Apify build, install `.[actor]` or use the Dockerfile. Actor name: `website-markdown-rag-change-feed`. License: MIT.
+
+Checkpoints are local files, not automatic Apify cross-run state. Local exports use atomic file replacements and write the checkpoint last; the output folder is not one transaction. Do not run multiple writers against one checkpoint. For external index updates, use `--previous-snapshot` and retain the old baseline until the index writes succeed. See the [full indexing guide](docs/INCREMENTAL_INDEXING.md).

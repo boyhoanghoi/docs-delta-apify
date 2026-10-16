@@ -18,6 +18,16 @@
       "title": "Flattened RAG chunks",
       "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/RAG_CHUNKS"
     },
+    "chunkOperations": {
+      "type": "string",
+      "title": "Replayable chunk UPSERT/REMOVE operations",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/CHUNK_OPERATIONS"
+    },
+    "chunkOperationsNdjson": {
+      "type": "string",
+      "title": "Chunk operations NDJSON",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/chunk-operations.ndjson"
+    },
     "summary": {
       "type": "string",
       "title": "Run summary and coverage limits",
