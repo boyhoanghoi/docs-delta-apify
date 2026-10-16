@@ -5,21 +5,41 @@
   "isPublic": true,
   "url": "https://apify.com/reliable_quatrain/website-markdown-rag-change-feed",
   "build": {
-    "buildId": "6zMU7RfTzcqkSI9bA",
-    "finishedAt": "2026-10-15T17:30:49.314Z",
-    "buildNumberInt": 100002,
-    "buildNumber": "0.1.2"
+    "buildId": "JEeCyRoJhpPWXAOak",
+    "finishedAt": "2026-10-16T11:34:02.782Z",
+    "buildNumberInt": 200001,
+    "buildNumber": "0.2.1"
   },
   "smokeRunIds": [
-    "MpffqgyiPZMmSQ9uK",
-    "TZ224or8hFwrUA7Xb"
+    "8OHzluBbB5cKyh6CO",
+    "5UqA8yaoqvcLlXX5M"
   ],
-  "sourceCommit": "958341fbea0843992fea46ae14599ab1f69ff310",
-  "unitTestsPassed": 31,
+  "sourceCommit": "8956044fe7c91b14c13fcb228e0341780a79b41d",
+  "unitTestsPassed": 46,
   "publicHttpStatus": 200,
   "anonymousPublicApiVerified": true,
   "billingEvent": "page-processed",
   "acquisitionKit": "docs/ACQUISITION_7_DAYS.md",
   "documentationBuildVerified": true,
-  "documentationImageInStoreHtml": true
+  "documentationImageInStoreHtml": true,
+  "incrementalFeedInStoreHtml": true,
+  "packageVersion": "0.2.0",
+  "verifiedDate": "2026-10-16",
+  "incrementalIndexingVerified": true,
+  "cloudSmoke": {
+    "first": {
+      "savedPages": 2,
+      "chargedPages": 2,
+      "chunkUpserts": 37,
+      "chunkRemovals": 0
+    },
+    "repeat": {
+      "savedPages": 0,
+      "chargedPages": 0,
+      "unchangedFiltered": 2,
+      "chunkUpserts": 0,
+      "chunkRemovals": 0,
+      "snapshotPreserved": true
+    }
+  }
 }

@@ -31,9 +31,15 @@ release verification are recorded separately in `LAUNCH_STATUS.md`.
   1 UNCHANGED page filtered, 0 saved rows/operations, baseline preserved exactly.
   These are owner tests, not customer demand or revenue.
 
-Recommended release smoke: run `examples/first-run.json` with a small cost cap,
-check dataset/event counts and CHUNK_OPERATIONS, then pass its SNAPSHOT back with
-changedOnly=true and verify zero operations when sources remain unchanged.
+Release `0.2.1` / `JEeCyRoJhpPWXAOak` succeeded from source commit
+`8956044fe7c91b14c13fcb228e0341780a79b41d` (package `0.2.0`). Cloud run
+`8OHzluBbB5cKyh6CO` saved 2 pages with 2 paid page events and 37 chunk UPSERTs;
+it emitted no REMOVE operations. Repeat run `5UqA8yaoqvcLlXX5M` passed the same
+SNAPSHOT with `changedOnly: true`: 2 unchanged pages filtered, zero saved rows,
+paid events or operations, and the previous baseline preserved exactly.
+Both runs used a USD 0.01 maximum Actor charge. Public Store HTTP 200 and its
+updated operation-feed documentation were verified. These are owner checks,
+not customer revenue; the page price remains unchanged.
 
 No page-deletion inference, automatic cloud state, JavaScript browser extraction,
 embedding service or vector database integration is added. The calling workflow
