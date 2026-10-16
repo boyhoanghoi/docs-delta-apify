@@ -48,10 +48,10 @@ Relative links resolve against the fetched final URL. Chunk `sourceUrl` and IDs 
 
 ## Safe incremental indexing
 
-1. Run with your explicit URL list and save the returned `SNAPSHOT` JSON in your own n8n storage or database.
-2. On the next run, set `previousSnapshot` to that JSON and `changedOnly: true`.
-3. For each returned `NEW`/`UPDATED` row, upsert its chunks into your index by `chunk.id`. Remove only the IDs explicitly listed in that row's `removedChunkIds`.
-4. After the run succeeds, replace your stored baseline with the new `SNAPSHOT`. Keep the previous baseline if the run itself fails before exporting a new snapshot.
+1. Run with your explicit URL list. For the first batch, omit `previousSnapshot`. Read both `CHUNK_OPERATIONS` and `SNAPSHOT`; the first batch must be indexed too.
+2. Apply the entire operation batch to your index: delete only explicit `REMOVE` IDs within their source page, then apply `UPSERT` records by chunk ID. An empty batch never means clear the index.
+3. Only after the Actor succeeds and every index write is confirmed, promote the returned `SNAPSHOT` to your stored baseline. Keep the previous baseline if the run or indexing fails; retry the batch before promoting it.
+4. On the next run, set `previousSnapshot` to that confirmed baseline and `changedOnly: true`. Apply the new batch and confirm index writes before promoting its snapshot again.
 5. Inspect `DIAGNOSTICS` and `SUMMARY` for blocked pages, limits and missing content before assuming coverage.
 
 **New: flat index operations.** Download `CHUNK_OPERATIONS` or `chunk-operations.ndjson` to process explicit `REMOVE` and `UPSERT` records without unpacking page arrays. Changed pages refresh all current chunk metadata; `isNewChunk` lets you identify IDs already present in the baseline. Unchanged pages emit no operations. [Operation contract and recurring CLI workflow](docs/INCREMENTAL_INDEXING.md).
