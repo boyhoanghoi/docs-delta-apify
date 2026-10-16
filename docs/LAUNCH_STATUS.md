@@ -4,8 +4,9 @@ Verified 16 October 2026 (Asia/Saigon).
 
 - Public Store: https://apify.com/reliable_quatrain/website-markdown-rag-change-feed
 - GitHub: https://github.com/boyhoanghoi/docs-delta-apify
-- Actor ID: `02Xe4XI3SVfP6CIka`; current build `0.2.1` / `JEeCyRoJhpPWXAOak` succeeded.
-- Package version `0.2.0`; deployed source commit `8956044fe7c91b14c13fcb228e0341780a79b41d`.
+- Actor ID: `02Xe4XI3SVfP6CIka`; current build `0.2.2` / `3VSQh1RtzWvhL9Wb3` succeeded.
+- Package version `0.2.0`; runtime source commit `8956044fe7c91b14c13fcb228e0341780a79b41d`.
+- Documentation-only build source: `abc94bec26f5952b1ce2e370f0709107fa569913`; runtime and pricing are unchanged from the cloud-tested build `0.2.1` / `JEeCyRoJhpPWXAOak`.
 - 46 meaningful Python unit tests passed in the standalone virtual environment.
 - Official Apify CLI validated input, dataset and output schemas.
 - Active single pay-per-event price: USD 0.003 per `page-processed`.
@@ -15,6 +16,8 @@ Verified 16 October 2026 (Asia/Saigon).
 
 The incremental-indexing release was checked with `examples/first-run.json`,
 512 MiB memory, a 180-second timeout and a USD 0.01 maximum Actor charge per run.
+Both runs below used build `0.2.1`; no additional paid run was started for the
+documentation-only `0.2.2` build.
 
 1. Run `8OHzluBbB5cKyh6CO` succeeded on build `JEeCyRoJhpPWXAOak`: 2 dataset
    rows, 2 `page-processed` events, 37 chunk UPSERT operations and 0 REMOVE
@@ -28,6 +31,18 @@ Final run metadata, dataset rows, SUMMARY and CHUNK_OPERATIONS were compared
 after each run. Public Store HTTP 200 and the new CHUNK_OPERATIONS documentation
 were also verified. The existing single USD 0.003 `page-processed` price and
 public visibility were preserved. No outreach was sent.
+
+## First-batch indexing instructions
+
+Documentation build `0.2.2` corrects the root and Store README sequence: apply
+the initial chunk-operation batch as well as later batches, and promote SNAPSHOT
+only after all index writes are confirmed. A failed index write retains the
+previous confirmed baseline for replay. No runtime code or paid event changed.
+The official version API confirmed both corrected instructions in the uploaded
+Store README, and the new build succeeded. The public Store returned HTTP 200,
+but canonical and cache-busting page requests still served the earlier indexing
+steps at the last check. Public HTML visibility of this wording remains pending;
+the operation-feed documentation itself was already visible.
 
 ## Earlier cloud integration checks
 

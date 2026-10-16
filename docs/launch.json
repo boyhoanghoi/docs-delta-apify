@@ -5,16 +5,16 @@
   "isPublic": true,
   "url": "https://apify.com/reliable_quatrain/website-markdown-rag-change-feed",
   "build": {
-    "buildId": "JEeCyRoJhpPWXAOak",
-    "finishedAt": "2026-10-16T11:34:02.782Z",
-    "buildNumberInt": 200001,
-    "buildNumber": "0.2.1"
+    "buildId": "3VSQh1RtzWvhL9Wb3",
+    "finishedAt": "2026-10-16T11:38:45.142Z",
+    "buildNumberInt": 200002,
+    "buildNumber": "0.2.2"
   },
   "smokeRunIds": [
     "8OHzluBbB5cKyh6CO",
     "5UqA8yaoqvcLlXX5M"
   ],
-  "sourceCommit": "8956044fe7c91b14c13fcb228e0341780a79b41d",
+  "sourceCommit": "abc94bec26f5952b1ce2e370f0709107fa569913",
   "unitTestsPassed": 46,
   "publicHttpStatus": 200,
   "anonymousPublicApiVerified": true,
@@ -41,5 +41,17 @@
       "chunkRemovals": 0,
       "snapshotPreserved": true
     }
-  }
+  },
+  "runtimeSourceCommit": "8956044fe7c91b14c13fcb228e0341780a79b41d",
+  "documentationSourceCommit": "abc94bec26f5952b1ce2e370f0709107fa569913",
+  "documentationOnlyBuild": true,
+  "cloudSmokeBuild": {
+    "buildId": "JEeCyRoJhpPWXAOak",
+    "buildNumber": "0.2.1",
+    "runtimeSourceCommit": "8956044fe7c91b14c13fcb228e0341780a79b41d"
+  },
+  "firstBatchInstructionsUploaded": true,
+  "firstBatchInstructionsInStoreHtml": false,
+  "latestStoreCheckHttpStatus": 200,
+  "latestStoreCheckUrl": "https://apify.com/reliable_quatrain/website-markdown-rag-change-feed?release=0.2.2-abc94be"
 }

@@ -41,6 +41,13 @@ Both runs used a USD 0.01 maximum Actor charge. Public Store HTTP 200 and its
 updated operation-feed documentation were verified. These are owner checks,
 not customer revenue; the page price remains unchanged.
 
+Documentation-only follow-up `0.2.2` / `3VSQh1RtzWvhL9Wb3` succeeded from
+`abc94bec26f5952b1ce2e370f0709107fa569913`. It corrects the README workflow to
+index the first batch and confirm all index writes before promoting SNAPSHOT.
+The official version API verified the uploaded wording. Public Store HTTP 200
+still served cached earlier steps at the final check; no new cloud smoke was
+needed because runtime source and pricing are unchanged from tested `0.2.1`.
+
 No page-deletion inference, automatic cloud state, JavaScript browser extraction,
 embedding service or vector database integration is added. The calling workflow
 still passes cloud snapshots explicitly and confirms index writes before
